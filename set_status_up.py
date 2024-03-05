@@ -1,9 +1,15 @@
 import requests
 import os
+import json
+import subprocess
+
+
 
 def get_ip():
-    ip = requests.get("https://httpbin.org/ip")
-    return ip.json()['origin']
+    status_data = subprocess.check_output(["tailscale", "status", "--json"]).decode("utf-8")
+    status_data = json.loads(status_data)
+
+    return status_data["TailscaleIPs"][0]
 
 def update_server_status(status,ip):
     db_url = 'https://avmtlbxffksxidupbiel.supabase.co/rest/v1/server_stats' 
