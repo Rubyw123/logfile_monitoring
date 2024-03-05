@@ -1,7 +1,9 @@
 import requests
-import socket
 import os
 
+def get_ip():
+    ip = requests.get("https://httpbin.org/ip")
+    return ip.json(['origin'])
 
 def update_server_status(status,ip):
     db_url = 'https://avmtlbxffksxidupbiel.supabase.co/rest/v1/server_stats' 
@@ -26,7 +28,7 @@ def update_server_status(status,ip):
         print("Error:",response.text)
 
 if __name__ == "__main__":
-    hostname = socket.gethostname()
-    ip = socket.gethostbyname(hostname)
+
+    ip = get_ip()
 
     update_server_status(True,ip)
