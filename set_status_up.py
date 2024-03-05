@@ -3,7 +3,7 @@ import os
 
 def get_ip():
     ip = requests.get("https://httpbin.org/ip")
-    return ip.json(['origin'])
+    return ip.json()['origin']
 
 def update_server_status(status,ip):
     db_url = 'https://avmtlbxffksxidupbiel.supabase.co/rest/v1/server_stats' 
