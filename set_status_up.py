@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# encoding:utf-8
+
 import requests
 import os
 import json
@@ -42,3 +45,4 @@ if __name__ == "__main__":
         if line == "POST /ml/generate_score/ HTTP/1.1":
             ip = get_ip()
             update_server_status(True,ip)
+
