@@ -2,7 +2,7 @@ import requests
 import os
 import json
 import subprocess
-
+import sys
 
 
 def get_ip():
@@ -36,6 +36,12 @@ def update_server_status(status,ip):
 
 if __name__ == "__main__":
 
-    ip = get_ip()
-
-    update_server_status(False,ip)
+    #setting a loop waiting for incoming log message
+    while True:
+        line = sys.stdin.readline()
+        file = open("/home/srv1/Documents/logfile_monitoring/output/out_python.log","a")
+        file.write(line)
+        file.close()
+        if line == "Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.":
+            ip = get_ip()
+            update_server_status(False,ip)

@@ -2,7 +2,7 @@ import requests
 import os
 import json
 import subprocess
-
+import sys
 
 
 def get_ip():
@@ -34,7 +34,11 @@ def update_server_status(status,ip):
         print("Error:",response.text)
 
 if __name__ == "__main__":
-
-    ip = get_ip()
-
-    update_server_status(True,ip)
+    while True:
+        line = sys.stdin.readline()
+        file = open("/home/srv1/Documents/logfile_monitoring/output/out_python.log","a")
+        file.write(line)
+        file.close()
+        if line == "POST /ml/generate_score/ HTTP/1.1":
+            ip = get_ip()
+            update_server_status(True,ip)
