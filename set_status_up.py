@@ -40,11 +40,13 @@ if __name__ == "__main__":
     while True:
         line = sys.stdin.readline()
         file = open("/home/srv1/Documents/logfile_monitoring/output/out_python.log","a")
-        file.write("Get log:")
+        file.write("Get log:/n")
         file.write(line)
 
         ip = get_ip()
+        file.write("ip complete /n")
         update_server_status(True,ip)
+        file.write("update complete /n")
 
         output = sys.stdout.readline()
         error = sys.stderr.readline()
