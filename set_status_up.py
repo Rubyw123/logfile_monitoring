@@ -14,7 +14,7 @@ def get_ip():
 
     return status_data["TailscaleIPs"][0]
 
-def update_server_status(status,ip):
+def update_server_status(status,ip,logfile):
     db_url = 'https://avmtlbxffksxidupbiel.supabase.co/rest/v1/server_stats' 
     headers = {
         "Content-Type": "application/json",
@@ -30,29 +30,35 @@ def update_server_status(status,ip):
 
     response = requests.post(db_url, json=data, headers = headers)
     
-    print(db_url+"?server_ip=eq."+ip)
+    #print(db_url+"?server_ip=eq."+ip)
     if response.status_code == 200:
-        print("Success")
+        print("Success",file=logfile)
     else:
-        print("Error:",response.text)
+        print("Error:",response.text,file=logfile)
 
 if __name__ == "__main__":
+    sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8', buffering=1)
 
-    #Open logfile
-    with open('/home/srv1/Documents/logfile_monitoring/output/out_python.log','a') as logfile:
-        #redirect stdout
-        original_stdout = sys.stdout
-        sys.stdout = logfile
+    try:
+        #Open logfile
+        with open('/home/srv1/Documents/logfile_monitoring/output/out_python.log','a') as logfile:
+            # #redirect stdout
+            # original_stdout = sys.stdout
+            # sys.stdout = logfile
 
-        # Read input log entry and write to logfile
-        inputline = sys.stdin.readline()
-        print(f"Input:{inputline.strip()}",file=logfile)
+            # Read input log entry and write to logfile
+            inputline = sys.stdin.readline()
+            print(f"Input:{inputline.strip()}",file=logfile)
 
-        #Setting server status
-        ip = get_ip()
-        update_server_status(True,ip)
+            #Setting server status
+            ip = get_ip()
+            update_server_status(True,ip,file=logfile)
 
-        sys.stdout = original_stdout
+            logfile.flush()
+            #sys.stdout = original_stdout
+    except Exception as e:
+            print(f"Error: {str(e)}", file=sys.stderr)
+            sys.stderr.flush()
 
 
     # while True:
