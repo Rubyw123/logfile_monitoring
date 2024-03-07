@@ -62,6 +62,10 @@ if __name__ == "__main__":
             ip = get_ip()
             print(f"IP Completed: {ip.strip()}", file=logfile, flush=True)
 
+            #Test Environment Variables
+            key = os.environ.get("SUPABASE_LOG_SERVICE_KEY")
+            print(f"Key variable completed: {key.strip()}", file=logfile, flush=True)
+
             update_server_status(True,ip,logfile)
             print(f"server completed:", file=logfile, flush=True)
 
