@@ -40,9 +40,15 @@ if __name__ == "__main__":
     while True:
         line = sys.stdin.readline()
         file = open("/home/srv1/Documents/logfile_monitoring/output/out_python.log","a")
+        file.write("Get log:")
         file.write(line)
+
+        ip = get_ip()
+        update_server_status(True,ip)
+        
+
+        file.write(sys.stdout)
+        file.write(sys.stderr)
         file.close()
-        if line == "POST /ml/generate_score/ HTTP/1.1":
-            ip = get_ip()
-            update_server_status(True,ip)
+
 
