@@ -45,10 +45,11 @@ if __name__ == "__main__":
 
         ip = get_ip()
         update_server_status(True,ip)
-        
 
-        file.write(sys.stdout)
-        file.write(sys.stderr)
+        output = sys.stdout.readline()
+        error = sys.stderr.readline()
+        file.write(output)
+        file.write(error)
         file.close()
 
 
