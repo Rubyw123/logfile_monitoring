@@ -48,8 +48,8 @@ if __name__ == "__main__":
         update_server_status(True,ip)
         file.write("update complete /n")
 
-        output = sys.stdout.readline()
-        error = sys.stderr.readline()
+        output = sys.stdout
+        error = sys.stderr
         file.write(output)
         file.write(error)
         file.close()
