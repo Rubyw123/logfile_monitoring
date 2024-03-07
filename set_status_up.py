@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
             #Setting server status
             ip = get_ip()
-            update_server_status(True,ip,file=logfile)
+            update_server_status(True,ip,logfile)
 
             logfile.flush()
             #sys.stdout = original_stdout
