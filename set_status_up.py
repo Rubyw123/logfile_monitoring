@@ -18,8 +18,10 @@ def update_server_status(status,ip,logfile):
     db_url = 'https://avmtlbxffksxidupbiel.supabase.co/rest/v1/server_stats' 
     headers = {
         "Content-Type": "application/json",
-        "apikey": os.environ.get("SUPABASE_LOG_SERVICE_KEY"),
-        "Authorization": "Bearer "+os.environ.get("SUPABASE_LOG_SERVICE_KEY"),
+        #"apikey": os.environ.get("SUPABASE_LOG_SERVICE_KEY"),
+        "apikey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2bXRsYnhmZmtzeGlkdXBiaWVsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwOTMyNDE3MiwiZXhwIjoyMDI0OTAwMTcyfQ.5bwX_GojbxArhz0xlqKZ4ih6s1Wwf80LiPnwftsZwS0",
+        #"Authorization": "Bearer "+os.environ.get("SUPABASE_LOG_SERVICE_KEY"),
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2bXRsYnhmZmtzeGlkdXBiaWVsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwOTMyNDE3MiwiZXhwIjoyMDI0OTAwMTcyfQ.5bwX_GojbxArhz0xlqKZ4ih6s1Wwf80LiPnwftsZwS0",
         "Prefer": "resolution=merge-duplicates",
 
     }
@@ -63,8 +65,8 @@ if __name__ == "__main__":
             print(f"IP Completed: {ip.strip()}", file=logfile, flush=True)
 
             #Test Environment Variables
-            key = os.environ.get("SUPABASE_LOG_SERVICE_KEY")
-            print(f"Key variable completed: {key.strip()}", file=logfile, flush=True)
+            #key = os.environ.get("SUPABASE_LOG_SERVICE_KEY")
+            #print(f"Key variable completed: {key.strip()}", file=logfile, flush=True)
 
             update_server_status(True,ip,logfile)
             print(f"server completed:", file=logfile, flush=True)
