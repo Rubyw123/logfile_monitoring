@@ -73,6 +73,9 @@ if __name__ == "__main__":
 
                 logfile.flush()
                 #sys.stdout = original_stdout
+            #Set the permissions of logfile
+            os.chmod(logfile,0o666)
+            
         except Exception as e:
                 print(f"Error: {str(e)}", file=sys.stderr)
                 sys.stderr.flush()
