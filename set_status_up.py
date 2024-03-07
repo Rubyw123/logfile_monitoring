@@ -52,15 +52,18 @@ if __name__ == "__main__":
 
             # Read input log entry and write to logfile
             inputline = sys.stdin.readline()
-            print(f"Input:{inputline.strip()}",file=logfile)
+            print(f"Input:{inputline.strip()}",file=logfile,flush=True)
 
             # Testing
             output_line = process_input(inputline)
-            print(f"Processed Output: {output_line.strip()}", file=logfile, flush=True)
-            
+            print(f"Test Processed Output: {output_line.strip()}", file=logfile, flush=True)
+
             #Setting server status
             ip = get_ip()
+            print(f"IP Completed: {ip.strip()}", file=logfile, flush=True)
+
             update_server_status(True,ip,logfile)
+            print(f"server completed:", file=logfile, flush=True)
 
             logfile.flush()
             #sys.stdout = original_stdout
