@@ -38,18 +38,16 @@ def update_server_status(status,ip):
 
 if __name__ == "__main__":
     while True:
-        line = sys.stdin.readline()
+        log_entry = sys.stdin.readline()
+        output = sys.stdout.readline()
+        error = sys.stderr.readline()
+
         file = open("/home/srv1/Documents/logfile_monitoring/output/out_python.log","a")
-        file.write("Get log:/n")
-        file.write(line)
+        file.write(log_entry)
 
         ip = get_ip()
-        file.write("ip complete /n")
         update_server_status(True,ip)
-        file.write("update complete /n")
 
-        output = sys.stdout
-        error = sys.stderr
         file.write(output)
         file.write(error)
         file.close()
