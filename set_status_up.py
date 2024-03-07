@@ -36,6 +36,10 @@ def update_server_status(status,ip,logfile):
     else:
         print("Error:",response.text,file=logfile)
 
+def process_input(line):
+     return line.upper()
+
+
 if __name__ == "__main__":
     sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8', buffering=1)
 
@@ -50,6 +54,10 @@ if __name__ == "__main__":
             inputline = sys.stdin.readline()
             print(f"Input:{inputline.strip()}",file=logfile)
 
+            # Testing
+            output_line = process_input(inputline)
+            print(f"Processed Output: {output_line.strip()}", file=logfile, flush=True)
+            
             #Setting server status
             ip = get_ip()
             update_server_status(True,ip,logfile)
