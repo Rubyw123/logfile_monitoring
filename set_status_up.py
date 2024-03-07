@@ -39,8 +39,8 @@ def update_server_status(status,ip):
 if __name__ == "__main__":
     while True:
         log_entry = sys.stdin.readline()
-        output = sys.stdout.readline()
-        error = sys.stderr.readline()
+        output = sys.stdout
+        error = sys.stderr
 
         file = open("/home/srv1/Documents/logfile_monitoring/output/out_python.log","a")
         file.write(log_entry)
