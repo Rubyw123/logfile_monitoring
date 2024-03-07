@@ -37,19 +37,37 @@ def update_server_status(status,ip):
         print("Error:",response.text)
 
 if __name__ == "__main__":
-    while True:
-        log_entry = sys.stdin.readline()
-        output = sys.stdout
-        error = sys.stderr
 
-        file = open("/home/srv1/Documents/logfile_monitoring/output/out_python.log","a")
-        file.write(log_entry)
+    #Open logfile
+    with open('/home/srv1/Documents/logfile_monitoring/output/out_python.log','a') as logfile:
+        #redirect stdout
+        original_stdout = sys.stdout
+        sys.stdout = logfile
 
+        # Read input log entry and write to logfile
+        inputline = sys.stdin.readline()
+        print(f"Input:{inputline.strip()}",file=logfile)
+
+        #Setting server status
         ip = get_ip()
         update_server_status(True,ip)
 
-        file.write(output)
-        file.write(error)
-        file.close()
+        sys.stdout = original_stdout
+
+
+    # while True:
+    #     log_entry = sys.stdin.readline()
+    #     output = sys.stdout
+    #     error = sys.stderr
+
+    #     file = open("/home/srv1/Documents/logfile_monitoring/output/out_python.log","a")
+    #     file.write(log_entry)
+
+    #     ip = get_ip()
+    #     update_server_status(True,ip)
+
+    #     file.write(output)
+    #     file.write(error)
+    #     file.close()
 
 
