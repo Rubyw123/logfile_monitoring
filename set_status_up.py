@@ -44,38 +44,38 @@ def process_input(line):
 
 if __name__ == "__main__":
     sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8', buffering=1)
+    while True:
+        try:
+            #Open logfile
+            with open('/home/srv1/Documents/logfile_monitoring/output/out_python.log','a') as logfile:
+                # #redirect stdout
+                # original_stdout = sys.stdout
+                # sys.stdout = logfile
 
-    try:
-        #Open logfile
-        with open('/home/srv1/Documents/logfile_monitoring/output/out_python.log','a') as logfile:
-            # #redirect stdout
-            # original_stdout = sys.stdout
-            # sys.stdout = logfile
+                # Read input log entry and write to logfile
+                inputline = sys.stdin.readline()
+                print(f"Input:{inputline.strip()}",file=logfile,flush=True)
 
-            # Read input log entry and write to logfile
-            inputline = sys.stdin.readline()
-            print(f"Input:{inputline.strip()}",file=logfile,flush=True)
+                # Testing
+                output_line = process_input(inputline)
+                print(f"Test Processed Output: {output_line.strip()}", file=logfile, flush=True)
 
-            # Testing
-            output_line = process_input(inputline)
-            print(f"Test Processed Output: {output_line.strip()}", file=logfile, flush=True)
+                #Setting server status
+                ip = get_ip()
+                print(f"IP Completed: {ip.strip()}", file=logfile, flush=True)
 
-            #Setting server status
-            ip = get_ip()
-            print(f"IP Completed: {ip.strip()}", file=logfile, flush=True)
+                #Test Environment Variables
+                #key = os.environ.get("SUPABASE_LOG_SERVICE_KEY")
+                #print(f"Key variable completed: {key.strip()}", file=logfile, flush=True)
 
-            #Test Environment Variables
-            #key = os.environ.get("SUPABASE_LOG_SERVICE_KEY")
-            #print(f"Key variable completed: {key.strip()}", file=logfile, flush=True)
+                update_server_status(True,ip,logfile)
+                print(f"server completed:", file=logfile, flush=True)
 
-            update_server_status(True,ip,logfile)
-            print(f"server completed:", file=logfile, flush=True)
-
-            logfile.flush()
-            #sys.stdout = original_stdout
-    except Exception as e:
-            print(f"Error: {str(e)}", file=sys.stderr)
-            sys.stderr.flush()
+                logfile.flush()
+                #sys.stdout = original_stdout
+        except Exception as e:
+                print(f"Error: {str(e)}", file=sys.stderr)
+                sys.stderr.flush()
 
 
     # while True:
